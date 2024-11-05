@@ -45,7 +45,7 @@ class Payment(models.Model):
     )
     date = models.DateTimeField(auto_now_add=True, verbose_name="дата оплаты")
     amount = models.DecimalField(
-        verbose_name="Сумма оплаты", max_digits=10, decimal_places=2
+        verbose_name="Сумма оплаты", max_digits=10, decimal_places=2,
     )
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, verbose_name="Оплаченный курс", **NULLABLE)
     lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, verbose_name="Оплаченный урок", **NULLABLE)

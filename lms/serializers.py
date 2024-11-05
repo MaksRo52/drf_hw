@@ -4,6 +4,11 @@ from lms.models import Course, Lesson
 
 
 class CourseSerializer(ModelSerializer):
+    lessons = SerializerMethodField()
+
+    def get_lessons(self, obj):
+       return [lesson.title for lesson in Lesson.objects.filter(course=obj)]
+
     class Meta:
         model = Course
         fields = '__all__'
