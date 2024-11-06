@@ -1,0 +1,86 @@
+[
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$TClNkjhjT01jcTsiHqkyK6$fFG0tU3eRlOYrzlY7uI9/2t84lR41MJ8vqSg/DN2yKc=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-02T12:17:42.056Z",
+    "email": "test1@example.com",
+    "phone_number": null,
+    "country": null,
+    "photo": "",
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Kt6ycDg0acrmGdVZiDEa8V$nTuT8NylPMXBxObdBat17jkIFZaesLkd/k4IgaOw6ZU=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-02T12:17:42.564Z",
+    "email": "test2@example.com",
+    "phone_number": null,
+    "country": null,
+    "photo": "",
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$CU8XX12864CIcfGfQOPxDo$MCW+moQ5H4yAfl51Vxk6jqVeWsEkTPgXEg9xUGs+0DI=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-02T12:17:42.916Z",
+    "email": "test3@example.com",
+    "phone_number": null,
+    "country": null,
+    "photo": "",
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$mIwL6uQucoNmFHExo8neXq$Lc2it0HNT5/evyXnolQ+ui30HwqO97nAfP2L2It41zU=",
+    "last_login": "2024-11-06T10:40:29.820Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-11-06T10:40:07.764Z",
+    "email": "admin@example.com",
+    "phone_number": null,
+    "country": null,
+    "photo": "",
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
