@@ -82,5 +82,26 @@
     "groups": [],
     "user_permissions": []
   }
+},
+{
+  "model": "users.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$b2F7hwgSAG4dTqovlLik9i$vYJTsjjzeelgPzD2wh41OtiV0GEoyL/YOCS3/O/mvE4=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-08T12:27:03.613Z",
+    "email": "test23@example.com",
+    "phone_number": null,
+    "country": null,
+    "photo": "",
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
 }
 ]

@@ -2,6 +2,7 @@ from django.core.management import BaseCommand
 
 from users.models import Payment
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         payment = Payment.objects.create()
