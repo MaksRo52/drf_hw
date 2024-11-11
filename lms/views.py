@@ -46,23 +46,30 @@ class LessonCreateApiView(CreateAPIView):
 
 
 class LessonListAPIView(ListAPIView):
-    queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+
+    def get_queryset(self):
+        """Возвращает объекты, в зависимости от прав доступа."""
+        if self.request.user.groups.filter(name="IsModer"):
+            return Lesson.objects.all()
+        else:
+            return Lesson.objects.filter(owner=self.request.user.id)
 
 
 class LessonRetrieveAPIView(RetrieveAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+    permission_classes = [IsAuthenticated & IsModer | IsOwner]
 
 
 class LessonUpdateAPIView(UpdateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-    permission_classes = [IsAuthenticated, IsModer]
+    permission_classes = [IsAuthenticated & IsModer | IsOwner]
 
 
 class LessonDestroyAPIView(DestroyAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-    permission_classes = [IsAuthenticated, ~IsModer]
+    permission_classes = [IsAuthenticated & IsOwner]
 
