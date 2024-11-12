@@ -1,10 +1,11 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework import serializers
 
 from lms.models import Course, Lesson
+from lms.validators import validate_lesson_video_link
 
 
-class CourseSerializer(ModelSerializer):
-    lessons = SerializerMethodField()
+class CourseSerializer(serializers.ModelSerializer):
+    lessons = serializers.SerializerMethodField()
 
     def get_lessons(self, obj):
        return [lesson.title for lesson in Lesson.objects.filter(course=obj)]
@@ -14,13 +15,14 @@ class CourseSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class LessonSerializer(ModelSerializer):
+class LessonSerializer(serializers.ModelSerializer):
+    video_url = serializers.URLField(validators=[validate_lesson_video_link])
     class Meta:
         model = Lesson
         fields = '__all__'
 
-class CourseDetailSerializer(ModelSerializer):
-    count_lessons = SerializerMethodField()
+class CourseDetailSerializer(serializers.ModelSerializer):
+    count_lessons = serializers.SerializerMethodField()
     lesson = LessonSerializer(many=True)
 
     def get_count_lessons(self, obj):
