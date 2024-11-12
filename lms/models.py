@@ -30,3 +30,16 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Пользователь', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, verbose_name='Курс', on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата подписки')
+
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+
+    def __str__(self):
+        return f"{self.user.username} - {self.course.title}"
