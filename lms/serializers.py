@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+NULLABLE = {"blank": True, "null": True}
 from lms.models import Course, Lesson, Subscription
 from lms.validators import validate_lesson_video_link
 
