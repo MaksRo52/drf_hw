@@ -21,9 +21,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework', 'users', 'lms','django_filters', 'rest_framework_simplejwt',
+    'rest_framework', 'users', 'lms', 'django_filters', 'rest_framework_simplejwt',
+    'drf_yasg',
 
 ]
+
+STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,7 +56,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'config.wsgi.application'
 
 REST_FRAMEWORK = {
@@ -77,7 +79,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -95,7 +96,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -143,7 +143,6 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {"django": {"handlers": ["console"], "propagate": False}},
 }
-
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),

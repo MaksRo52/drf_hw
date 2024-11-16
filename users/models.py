@@ -1,8 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+
 NULLABLE = {"blank": True, "null": True}
-from lms.models import  Course, Lesson
+from lms.models import Course, Lesson
 
 
 class User(AbstractUser):
@@ -49,4 +50,20 @@ class Payment(models.Model):
     )
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, verbose_name="Оплаченный курс", **NULLABLE)
     lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, verbose_name="Оплаченный урок", **NULLABLE)
-    payment_method = models.CharField(max_length=20, choices={"cash": "Оплата наличными", "transfer": "Оплата переводом"})
+    payment_method = models.CharField(max_length=20,
+                                      choices={"cash": "Оплата наличными", "transfer": "Оплата переводом"})
+    session_id = models.CharField(max_length=255,
+                                  verbose_name='ID сессии',
+                                  blank=True,
+                                  null=True, )
+    link_to_payment = models.URLField(max_length=400,
+                                      verbose_name='ссылка на оплату',
+                                      blank=True,
+                                      null=True, )
+
+    class Meta:
+        verbose_name = "Оплата"
+        verbose_name_plural = "Оплаты"
+
+    def __str__(self):
+        return self.amount

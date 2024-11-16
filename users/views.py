@@ -8,6 +8,8 @@ from rest_framework.viewsets import ModelViewSet
 
 from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer
+from users.services import convert_rub_to_dollars, create_stripe_price, create_stripe_session, create_stripe_product
+
 
 # Create your views here.
 
@@ -51,3 +53,20 @@ class UserListAPIView(ListAPIView):
 class UserRetrieveAPIView(RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+
+class PaymentCreateAPIView(CreateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+
+    def perform_create(self, serializer):
+        pay = serializer.save(user=self.request.user)
+        amount_in_dollars = convert_rub_to_dollars(pay.amount)
+        product = create_stripe_product(pay)
+        price = create_stripe_price(amount_in_dollars, product)
+        session_id, payment_link = create_stripe_session(price)
+        pay.session_id = session_id
+        pay.payment_link = payment_link
+        pay.save()
+
+
