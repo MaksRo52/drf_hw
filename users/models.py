@@ -51,7 +51,7 @@ class Payment(models.Model):
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, verbose_name="Оплаченный курс", **NULLABLE)
     lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, verbose_name="Оплаченный урок", **NULLABLE)
     payment_method = models.CharField(max_length=20,
-                                      choices={"cash": "Оплата наличными", "transfer": "Оплата переводом"})
+                                      choices={"cash": "Оплата наличными", "transfer": "Оплата переводом"}, **NULLABLE)
     session_id = models.CharField(max_length=255,
                                   verbose_name='ID сессии',
                                   blank=True,
