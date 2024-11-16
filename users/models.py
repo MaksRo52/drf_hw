@@ -42,7 +42,7 @@ class User(AbstractUser):
 
 class Payment(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name="Пользователь"
+        User, on_delete=models.CASCADE, verbose_name="Пользователь", **NULLABLE
     )
     date = models.DateTimeField(auto_now_add=True, verbose_name="дата оплаты")
     amount = models.DecimalField(

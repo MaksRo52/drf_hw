@@ -14,17 +14,19 @@ def convert_rub_to_dollars(amount):
 
 def create_stripe_price(amount, product):
     """Создает цену в страйпе"""
-    return stripe.Price.create(
+    price = stripe.Price.create(
         currency="usd",
         unit_amount=amount * 100,
-        product_data={"name": "product"},
+        product_data={"name": product},
     )
+    return price.get("id")
 
 
 def create_stripe_product(product):
     """Создает продукт в страйпе"""
     products = product.course if product.course else product.lesson
-    return stripe.Product.create(name=products)
+    product_id = stripe.Product.create(name=products)
+    return product_id.get("id")
 
 
 def create_stripe_session(price):
