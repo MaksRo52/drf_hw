@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView, get_object_or_404)
@@ -5,10 +6,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from config import settings
 from lms.models import Course, Lesson, Subscription
 from lms.paginators import CustomPagination
 from lms.serializers import (CourseDetailSerializer, CourseSerializer,
                              LessonSerializer, SubscriptionSerializer)
+from lms.tasks import send_information_from_subscribe
 from users.permissions import IsModer, IsOwner
 
 
@@ -33,6 +36,14 @@ class CourseViewSet(ModelViewSet):
         elif self.action == "destroy":
             self.permission_classes = (~IsModer | IsOwner,)
         return super().get_permissions()
+
+    def perform_update(self, serializer):
+        updated_course = serializer.save()
+        subscriptions = Subscription.objects.filter(course=updated_course)
+        for subscription in subscriptions:
+            send_information_from_subscribe.delay(updated_course.title, subscription.user.email)
+        updated_course.save()
+
 
 
 
@@ -97,3 +108,7 @@ class SubscriptionCreateApiView(CreateAPIView):
             message = 'подписка добавлена'
         # Возвращаем ответ в API
         return Response({"message": message})
+
+class SubscriptionListAPIView(ListAPIView):
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
